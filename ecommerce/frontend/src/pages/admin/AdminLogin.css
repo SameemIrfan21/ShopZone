@@ -1,0 +1,59 @@
+.admin-login-page {
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #1565c0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.admin-login-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.admin-login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.admin-login-icon { font-size: 48px; margin-bottom: 12px; }
+
+.admin-login-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a237e;
+  margin-bottom: 4px;
+}
+
+.admin-login-header p {
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.auth-error {
+  background: #fce4ec;
+  color: var(--danger);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--danger);
+}
+
+.admin-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 16px;
+  padding: 8px;
+  background: var(--bg-light);
+  border-radius: var(--radius);
+}
