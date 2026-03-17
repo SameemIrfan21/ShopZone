@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "ecommerce/backend/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "ecommerce/frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/ecommerce/backend/server.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/ecommerce/frontend/$1"
+    }
+  ]
+}
