@@ -21,7 +21,7 @@ app.use('/api/cart', require('./routes/cart'));
 app.use('/api/admin', require('./routes/admin'));
 
 // MongoDB Connection
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/ecommerce';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ecommerce';
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,

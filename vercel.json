@@ -19,8 +19,16 @@
       "destination": "/ecommerce/backend/server.js"
     },
     {
-      "source": "/(.*)",
+      "source": "/static/(.*)",
+      "destination": "/ecommerce/frontend/static/$1"
+    },
+    {
+      "source": "/(favicon\\.ico|manifest\\.json|logo192\\.png|logo512\\.png|robots\\.txt)",
       "destination": "/ecommerce/frontend/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/ecommerce/frontend/index.html"
     }
   ]
 }
