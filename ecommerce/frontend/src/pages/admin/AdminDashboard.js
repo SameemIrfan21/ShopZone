@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../api';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import './AdminPages.css';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../api';
 import { useAuth } from '../../context/AuthContext';
 import './OrderPage.css';
 
