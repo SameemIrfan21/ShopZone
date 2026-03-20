@@ -11,6 +11,14 @@ export default function RegisterPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const getFriendlyError = (err) => {
+    const msg = err.response?.data?.message || '';
+    if (msg.includes('already registered')) return '⚠️ This email is already registered. Try logging in!';
+    if (msg.includes('buffering timed out') || !err.response)
+      return '⚠️ Server is starting up, please wait a moment and try again.';
+    return msg || '⚠️ Something went wrong. Please try again.';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(''); setLoading(true);
@@ -19,7 +27,7 @@ export default function RegisterPage() {
       login(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(getFriendlyError(err));
     } finally {
       setLoading(false);
     }
@@ -29,14 +37,29 @@ export default function RegisterPage() {
     <div className="auth-page">
       <div className="auth-left">
         <div className="auth-brand">
+          <span className="auth-brand-logo">🛍️</span>
           <h1>ShopZone</h1>
-          <p>Looks like you're new here! Sign up with your details</p>
+          <p>Join millions of happy shoppers today</p>
+          <div className="auth-brand-features">
+            <div className="auth-feature-item">
+              <span className="auth-feature-icon">✅</span>
+              <span>Free & easy registration</span>
+            </div>
+            <div className="auth-feature-item">
+              <span className="auth-feature-icon">🎁</span>
+              <span>Exclusive member deals</span>
+            </div>
+            <div className="auth-feature-item">
+              <span className="auth-feature-icon">🔒</span>
+              <span>Your data is safe with us</span>
+            </div>
+          </div>
         </div>
       </div>
       <div className="auth-right">
         <div className="auth-card fade-in">
-          <h2>Create Account</h2>
-          <p className="auth-sub">Join millions of shoppers on ShopZone</p>
+          <h2>Create Account ✨</h2>
+          <p className="auth-sub">Join ShopZone — it's free!</p>
           {error && <div className="auth-error">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -65,7 +88,7 @@ export default function RegisterPage() {
                 value={form.address} onChange={e => setForm({ ...form, address: e.target.value })} />
             </div>
             <button type="submit" className={`btn btn-secondary btn-block btn-lg ${loading ? 'btn-disabled' : ''}`}>
-              {loading ? 'Creating account...' : 'Create Account'}
+              {loading ? '⏳ Creating account...' : '🚀 Create Account'}
             </button>
           </form>
           <div className="auth-divider"><span>OR</span></div>

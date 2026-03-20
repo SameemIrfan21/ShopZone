@@ -11,6 +11,14 @@ export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const getFriendlyError = (err) => {
+    const msg = err.response?.data?.message || '';
+    if (msg.includes('Invalid credentials')) return '❌ Wrong email or password. Please try again.';
+    if (msg.includes('buffering timed out') || err.code === 'ECONNABORTED' || !err.response)
+      return '⚠️ Server is starting up, please wait a moment and try again.';
+    return msg || '⚠️ Something went wrong. Please try again.';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(''); setLoading(true);
@@ -19,7 +27,7 @@ export default function LoginPage() {
       login(res.data.user, res.data.token);
       navigate(res.data.user.role === 'admin' ? '/admin/dashboard' : '/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      setError(getFriendlyError(err));
     } finally {
       setLoading(false);
     }
@@ -29,14 +37,29 @@ export default function LoginPage() {
     <div className="auth-page">
       <div className="auth-left">
         <div className="auth-brand">
+          <span className="auth-brand-logo">🛍️</span>
           <h1>ShopZone</h1>
-          <p>Get access to your Orders, Wishlist and Recommendations</p>
+          <p>India's most loved shopping destination</p>
+          <div className="auth-brand-features">
+            <div className="auth-feature-item">
+              <span className="auth-feature-icon">🚀</span>
+              <span>Fast & secure checkout</span>
+            </div>
+            <div className="auth-feature-item">
+              <span className="auth-feature-icon">📦</span>
+              <span>Track orders in real-time</span>
+            </div>
+            <div className="auth-feature-item">
+              <span className="auth-feature-icon">💰</span>
+              <span>Exclusive deals & offers</span>
+            </div>
+          </div>
         </div>
       </div>
       <div className="auth-right">
         <div className="auth-card fade-in">
-          <h2>Login</h2>
-          <p className="auth-sub">Welcome back! Please enter your details.</p>
+          <h2>Welcome back 👋</h2>
+          <p className="auth-sub">Login to access your ShopZone account</p>
           {error && <div className="auth-error">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -54,7 +77,7 @@ export default function LoginPage() {
               />
             </div>
             <button type="submit" className={`btn btn-secondary btn-block btn-lg ${loading ? 'btn-disabled' : ''}`}>
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? '⏳ Logging in...' : '🔐 Login'}
             </button>
           </form>
           <div className="auth-divider"><span>OR</span></div>
